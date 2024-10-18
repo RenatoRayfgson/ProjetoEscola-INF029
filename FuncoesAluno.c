@@ -94,4 +94,4 @@ void listarAlunoIdade(struct Aluno listaAlunos[], int qtdAlunos){
     }
 
 };
-//aaa bruno é viado demais
+//aaa 
