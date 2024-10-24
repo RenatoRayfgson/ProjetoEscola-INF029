@@ -12,6 +12,7 @@ struct Aluno{
     struct Data dataNascimento;
     char cpf[12];
     int idade; //Em dias
+    int disciplinasMatriculadas[maxDisciplinas];
 };
 
 struct Professor{
@@ -30,8 +31,10 @@ struct Disciplina{
     int matriculaProfessor;
 };
 
+//Extras
 void menuPrincipal();
 void limparBuffer();
+void aniversariantesMes(struct Professor listaProfessores[], struct Aluno listaAlunos[], int qtdProfessores, int qtdAlunos);
 
 //Aluno
 void menuAluno();
@@ -53,3 +56,4 @@ void matricularProfessor(struct Professor listaProfessores[], int temp, int qtdP
 void listarProfessor(struct Professor listaProfessores[], int qtdProfessores);
 void removerProfessor(struct Professor listaProfessores[], int i, int j, int qtdProfessores, int temp);
 void listaProfessorSexo(struct Professor listaProfessores[], int qtdProfessores);
+void listarProfessorIdade(struct Professor listaProfessores[], int qtdProfessores);

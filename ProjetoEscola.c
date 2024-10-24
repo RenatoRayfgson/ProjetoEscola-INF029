@@ -5,7 +5,7 @@
 int main(){    
     setlocale(LC_ALL,"Portuguese"); 
     int opcao=-1, opcaoAluno=-1, opcaoProfessor=-1, opcaoDisciplina=-1;
-    int i=0,j=0,qtdAlunos=0,temp,verificador=0,qtdProfessores=0, qtdDisciplinas=0;
+    int i=0,j=0,qtdAlunos=0,temp,verificador=0,qtdProfessores=0, qtdDisciplinas=0, aux;
     struct Aluno listaAlunos[maxAlunos];   
     struct Professor listaProfessores[maxProfessores]; 
     struct Disciplina listaMatriculados[maxAlunos];
@@ -43,7 +43,8 @@ int main(){
                                     }
                                 }
                                 listaAlunos[qtdAlunos].matricula=temp;
-                                matricularAluno(listaAlunos, temp, qtdAlunos);
+                                matricularAluno(listaAlunos, temp, qtdAlunos); 
+                                adicionarAlunoDisciplina(listaAlunos, qtdAlunos, listaDisciplinas, qtdDisciplinas);                             
                                 qtdAlunos++;
                                 break;
                             }

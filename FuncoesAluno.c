@@ -28,7 +28,56 @@ void matricularAluno(struct Aluno listaAlunos[],int temp, int qtdAlunos){
     printf("Insira o CPF do aluno, sem pontos ou traços: \n");
     fgets(listaAlunos[qtdAlunos].cpf, 12, stdin);
     limparBuffer();
-    listaAlunos[qtdAlunos].idade = listaAlunos[qtdAlunos].dataNascimento.ano * 365 + listaAlunos[qtdAlunos].dataNascimento.mes * 30 + listaAlunos[qtdAlunos].dataNascimento.dia;
+    listaAlunos[qtdAlunos].idade = listaAlunos[qtdAlunos].dataNascimento.ano * 365 + listaAlunos[qtdAlunos].dataNascimento.mes * 30 + listaAlunos[qtdAlunos].dataNascimento.dia;           
+};
+void adicionarAlunoDisciplina(struct Aluno listaAlunos[], int qtdAlunos, struct Disciplina listaDisciplinas[], int qtdDisciplinas){
+    int i, j=0, qtdMatriculas=0;
+    int temp = -1;
+    //Loop que define todas as matrículas do aluno como 0 pra ajudar na busca
+    for(int i=0; i<maxDisciplinas; i++){
+    listaAlunos[qtdAlunos].disciplinasMatriculadas[i] = 0;
+    }
+    //Isso aqui teoricamente tem que matricular o aluno na disciplina, poderia ter usado o do while, mas meh
+    while(temp != 0){
+        int verificador=0;
+        printf("Qual codigo da disciplina que o aluno deve ser matriculado? (Insira 0 para encerrar)\n");
+        scanf("%d", &temp);
+        if(temp == 0){
+            break;
+        }else{
+            for(int i=0; i<qtdDisciplinas; i++){ //Valida se a disciplina existe
+                if(temp==listaDisciplinas[i].codigo){
+                    verificador = 1;
+                    break;
+                }
+            }
+            if(verificador == 1){                
+                if(qtdMatriculas<maxDisciplinas){
+                    int jaMatriculado=0;
+                    for(i=0; i<qtdMatriculas; i++){
+                        if(temp == listaAlunos[qtdAlunos].disciplinasMatriculadas[i]){
+                            jaMatriculado = 1;
+                            break;
+                        }
+                    }
+                    if(jaMatriculado == 1){
+                        printf("Aluno já matriculado na disciplina!\n");
+                    }else{
+                    listaAlunos[qtdAlunos].disciplinasMatriculadas[qtdMatriculas] = temp;
+                    qtdMatriculas++;
+                    }
+                }else{
+                    printf("Limite de disciplinas atingido\n");
+                }
+            }else{
+                printf("A disciplina não existe!\n");
+            }
+        }
+    }
+    printf("Aluno matriculado nas seguintes disciplinas: ");
+    for(i=0; i<qtdMatriculas; i++){
+        printf("%d ",listaAlunos[qtdAlunos].disciplinasMatriculadas[i]);
+    }
 };
 void listarAluno(struct Aluno listaAlunos[], int qtdAlunos){
     if(qtdAlunos==0){
@@ -94,4 +143,4 @@ void listarAlunoIdade(struct Aluno listaAlunos[], int qtdAlunos){
     }
 
 };
-//aaa 
+//A função adicionarAlunoDisciplina precisa de testes
