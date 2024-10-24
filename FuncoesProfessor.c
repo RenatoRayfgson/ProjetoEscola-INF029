@@ -62,4 +62,30 @@ void listaProfessorSexo(struct Professor listaProfessores[], int qtdProfessores)
         }
     }
 };
+void listarProfessorIdade(struct Professor listaProfessores[], int qtdProfessores){
+    int professoresIdade[qtdProfessores];
+    int temp;    
+    printf("A lista do aluno mais velho ao mais novo é:\n ");
+    printf("\n");
+    for(int i=0; i<qtdProfessores; i++){
+        professoresIdade[i]=listaProfessores[i].idade;
+    }
+    for(int i=0; i<qtdProfessores-1; i++){
+        for (int j=0; j<qtdProfessores-i-1; j++){
+            if(professoresIdade[j]>professoresIdade[j+1]){
+                temp=professoresIdade[j];
+                professoresIdade[j]=professoresIdade[j+1];
+                professoresIdade[j+1]=temp;                
+            }
+        }
+    }
+    for(int i=0; i<qtdProfessores; i++){
+        for(int j=0; j<qtdProfessores; j++){
+            if(professoresIdade[i]==listaProfessores[j].idade){
+                printf("%s\n", listaProfessores[j].nome);
+            }
+        }
+    }
+
+};
 //aa
