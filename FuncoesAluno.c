@@ -89,6 +89,19 @@ void listarAluno(struct Aluno listaAlunos[], int qtdAlunos){
         }
     }
 };
+void listarAlunoPoucasDisciplinas(struct Aluno listaAlunos[], int qtdAlunos, struct Disciplina ListaDisciplinas[]){
+    printf("Os alunos matriculados em menos de 3 disciplinas são: \n");
+    for(int i=0; i<qtdAlunos; i++){
+        int qtdMatriculas=0, j=0;
+        while(listaAlunos[i].disciplinasMatriculadas[j] != 0){
+            qtdMatriculas++;
+            j++;
+        }
+        if(qtdMatriculas<3){
+            printf("%s\n", listaAlunos[i].nome);
+        }
+    }
+}; 
 void removerAluno(int temp, struct Aluno listaAlunos[], int j, int i, int qtdAlunos){
     while(temp!=listaAlunos[i].matricula){i++;} 
     for(j=i;j<qtdAlunos-1;j++){
@@ -141,6 +154,6 @@ void listarAlunoIdade(struct Aluno listaAlunos[], int qtdAlunos){
             }
         }
     }
-
 };
+
 //A função adicionarAlunoDisciplina precisa de testes

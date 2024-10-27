@@ -35,6 +35,7 @@ struct Disciplina{
 void menuPrincipal();
 void limparBuffer();
 void aniversariantesMes(struct Professor listaProfessores[], struct Aluno listaAlunos[], int qtdProfessores, int qtdAlunos);
+void buscaPessoas(struct Professor listaProfessores[], struct Aluno listaAlunos[], int qtdProfessores, int qtdAlunos);
 
 //Aluno
 void menuAluno();
@@ -43,6 +44,7 @@ void listarAluno(struct Aluno listaAlunos[], int qtdAlunos);
 void removerAluno(int temp, struct Aluno listaAlunos[], int j, int i, int qtdAlunos);
 void listaAlunoSexo(struct Aluno listaAlunos[], int qtdAlunos);
 void listarAlunoIdade(struct Aluno listaAlunos[], int qtdAlunos);
+void listarAlunoPoucasDisciplinas(struct Aluno listaAlunos[], int qtdAlunos, struct Disciplina ListaDisciplinas[]);
 
 //Disciplina
 void menuDisciplina();
