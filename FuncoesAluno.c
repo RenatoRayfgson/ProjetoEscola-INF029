@@ -6,6 +6,9 @@ void menuAluno(){
     "[1] - Matricular aluno\n"
     "[2] - Listar aluno\n"
     "[3] - Remover aluno\n"
+    "[4] - Listar aluno por sexo\n"
+    "[5] - Listar aluno por idade\n"
+    "[6] - Listar aluno matriculado em menos de 3 disciplinas\n"
     "[0] - Voltar\n ");
 };
 void matricularAluno(struct Aluno listaAlunos[],int temp, int qtdAlunos){
@@ -89,7 +92,7 @@ void listarAluno(struct Aluno listaAlunos[], int qtdAlunos){
         }
     }
 };
-void listarAlunoPoucasDisciplinas(struct Aluno listaAlunos[], int qtdAlunos, struct Disciplina ListaDisciplinas[]){
+void listarAlunoPoucasDisciplinas(struct Aluno listaAlunos[], int qtdAlunos){
     printf("Os alunos matriculados em menos de 3 disciplinas são: \n");
     for(int i=0; i<qtdAlunos; i++){
         int qtdMatriculas=0, j=0;
@@ -115,17 +118,18 @@ void removerAluno(int temp, struct Aluno listaAlunos[], int j, int i, int qtdAlu
         listaAlunos[j].idade=listaAlunos[j+1].idade;
     }    
 };
-void listaAlunoSexo(struct Aluno listaAlunos[], int qtdAlunos){
+void listarAlunoSexo(struct Aluno listaAlunos[], int qtdAlunos){
+    int i;
     printf("Os alunos masculinos são: \n");
-    for(int i=0;i<qtdAlunos;i++){
-        if (listaAlunos[i].sexo == 'M'){
+    for(i=0;i<qtdAlunos;i++){
+        if (listaAlunos[i].sexo[0] == 'M'){
             printf("%s\n", listaAlunos[i].nome);
         }
     }
     printf("\n");
     printf("As alunas femininas são: \n");
-    for(int i=0;i<qtdAlunos;i++){
-        if (listaAlunos[i].sexo == 'F'){
+    for(i=0;i<qtdAlunos;i++){
+        if (listaAlunos[i].sexo[0] == 'F'){
             printf("%s\n", listaAlunos[i].nome);
         }
     }
