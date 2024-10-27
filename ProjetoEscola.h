@@ -8,7 +8,7 @@ struct Data{
 struct Aluno{
     int matricula;
     char nome[128];
-    char sexo[2]; 
+    char sexo[1]; 
     struct Data dataNascimento;
     char cpf[12];
     int idade; //Em dias
@@ -42,9 +42,9 @@ void menuAluno();
 void matricularAluno(struct Aluno listaAlunos[], int temp, int qtdAlunos);
 void listarAluno(struct Aluno listaAlunos[], int qtdAlunos);
 void removerAluno(int temp, struct Aluno listaAlunos[], int j, int i, int qtdAlunos);
-void listaAlunoSexo(struct Aluno listaAlunos[], int qtdAlunos);
+void listarAlunoSexo(struct Aluno listaAlunos[], int qtdAlunos);
 void listarAlunoIdade(struct Aluno listaAlunos[], int qtdAlunos);
-void listarAlunoPoucasDisciplinas(struct Aluno listaAlunos[], int qtdAlunos, struct Disciplina ListaDisciplinas[]);
+void listarAlunoPoucasDisciplinas(struct Aluno listaAlunos[], int qtdAlunos); //Tirei struct Disciplina listaDisciplinas[]
 
 //Disciplina
 void menuDisciplina();
@@ -57,5 +57,5 @@ void menuProfessor();
 void matricularProfessor(struct Professor listaProfessores[], int temp, int qtdProfessores);
 void listarProfessor(struct Professor listaProfessores[], int qtdProfessores);
 void removerProfessor(struct Professor listaProfessores[], int i, int j, int qtdProfessores, int temp);
-void listaProfessorSexo(struct Professor listaProfessores[], int qtdProfessores);
+void listarProfessorSexo(struct Professor listaProfessores[], int qtdProfessores);
 void listarProfessorIdade(struct Professor listaProfessores[], int qtdProfessores);

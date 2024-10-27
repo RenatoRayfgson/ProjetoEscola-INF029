@@ -6,6 +6,8 @@ void menuProfessor(){
     "[1] - Matricular professor\n"
     "[2] - Listar professor\n"
     "[3] - Remover professor\n"
+    "[4] - Listar professor por sexo\n"
+    "[5] - Listar professor por idade\n"
     "[0] - Voltar\n ");    
 };
 void matricularProfessor(struct Professor listaProfessores[], int temp, int qtdProfessores){
@@ -28,6 +30,7 @@ void matricularProfessor(struct Professor listaProfessores[], int temp, int qtdP
     printf("Insira o CPF do professor, sem pontos ou traços: \n");
     fgets(listaProfessores[qtdProfessores].cpf, 12, stdin);
     limparBuffer();
+    listaProfessores[qtdProfessores].idade = listaProfessores[qtdProfessores].dataNascimento.ano*365+listaProfessores[qtdProfessores].dataNascimento.mes*30+listaProfessores[qtdProfessores].dataNascimento.dia;
 };
 void listarProfessor(struct Professor listaProfessores[], int qtdProfessores){
     for(int i=0; i<qtdProfessores; i++){
@@ -47,17 +50,17 @@ void removerProfessor(struct Professor listaProfessores[], int i, int j, int qtd
         listaProfessores[j].dataNascimento.dia=listaProfessores[j+1].dataNascimento.dia;
     }    
 };
-void listaProfessorSexo(struct Professor listaProfessores[], int qtdProfessores){
-    printf("Os professores são: \n");
+void listarProfessorSexo(struct Professor listaProfessores[], int qtdProfessores){
+    printf("Os professores masculinos são: \n");
     for(int i=0;i<qtdProfessores;i++){
-        if (listaProfessores[i].sexo == 'M'){
+        if (listaProfessores[i].sexo[0] == 'M'){
             printf("%s\n", listaProfessores[i].nome);
         }
     }
     printf("\n");
-    printf("As professoras são: \n");
+    printf("As professoras femininas são: \n");
     for(int i=0;i<qtdProfessores;i++){
-        if (listaProfessores[i].sexo == 'F'){
+        if (listaProfessores[i].sexo[0] == 'F'){
             printf("%s\n", listaProfessores[i].nome);
         }
     }
@@ -65,7 +68,7 @@ void listaProfessorSexo(struct Professor listaProfessores[], int qtdProfessores)
 void listarProfessorIdade(struct Professor listaProfessores[], int qtdProfessores){
     int professoresIdade[qtdProfessores];
     int temp;    
-    printf("A lista do aluno mais velho ao mais novo é:\n ");
+    printf("A lista do professor mais velho ao mais novo é:\n ");
     printf("\n");
     for(int i=0; i<qtdProfessores; i++){
         professoresIdade[i]=listaProfessores[i].idade;

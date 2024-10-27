@@ -75,6 +75,21 @@ int main(){
                                 break;
                             }
                         }
+                        case 4:{
+                            opcaoAluno = -1;
+                            listarAlunoSexo(listaAlunos, qtdAlunos);
+                            break;
+                        }
+                        case 5:{
+                            opcaoAluno = -1;
+                            listarAlunoIdade(listaAlunos, qtdAlunos);
+                            break;
+                        }
+                        case 6:{
+                            opcaoAluno = -1;
+                            listarAlunoPoucasDisciplinas(listaAlunos, qtdAlunos);
+                            break;
+                        }
                         default:{    //Caso o usuário seja incapaz de ler
                             printf("Opção invalida!\n");
                             break;
@@ -140,6 +155,20 @@ int main(){
                                 printf("Professor não matriculado\n");
                                 break;
                             }
+                        }
+                        case 4:{
+                            opcaoProfessor = -1;
+                            listarProfessorSexo(listaProfessores, qtdProfessores);
+                            break;
+                        }
+                        case 5:{
+                            opcaoProfessor = -1;
+                            listarProfessorIdade(listaProfessores, qtdProfessores);
+                            break;
+                        }
+                        default:{
+                            printf("Opção invalida!\n");
+                            break;
                         }
                     }
                 }
@@ -216,6 +245,14 @@ int main(){
                         }
                     }
                 }
+                break;
+            }
+            case 4:{ //Aniversariantes do mês
+                aniversariantesMes(listaProfessores, listaAlunos, qtdProfessores, qtdAlunos);
+                break;
+            }
+            case 5:{ //Busca por nome
+                buscaPessoas(listaProfessores, listaAlunos, qtdProfessores, qtdAlunos);
                 break;
             }
             default:{    //Caso o usuário seja incapaz de ler

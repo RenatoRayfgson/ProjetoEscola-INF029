@@ -8,6 +8,8 @@ void menuPrincipal(){
     "[1] - Aluno\n"
     "[2] - Professor\n"
     "[3] - Disciplina\n"
+    "[4] - Aniversariantes do mês\n"
+    "[5] - Buscar nomes\n"
     "[0] - Encerrar\n ");    
 };
 void limparBuffer(){
