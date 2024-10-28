@@ -8,16 +8,17 @@ void menuDisciplina(){
     "[3] - Remover Disciplina\n"
     "[0] - Voltar\n ");
 };
-void criarDisciplina(int qtdDisciplinas, struct Disciplina listaDisciplinas[]){
+void criarDisciplina(int qtdDisciplinas, struct Disciplina listaDisciplinas[]){    
+    limparBuffer();
     printf("Qual o nome da Disciplina? ");
-    gets(listaDisciplinas[qtdDisciplinas].nome);
+    gets(listaDisciplinas[qtdDisciplinas].nome);    
     limparBuffer();
     printf("Qual o código da nova Disciplina? ");
     scanf("%d", &listaDisciplinas[qtdDisciplinas].codigo);
     limparBuffer();
     printf("Qual o semestre da Disciplina? ");
     scanf("%d", &listaDisciplinas[qtdDisciplinas].semestre);
-    limparBuffer();   
+    limparBuffer();       
 };
 void listarDisciplina(int qtdDisciplinas, struct Disciplina listaDisciplinas[]){
     for(int i=0;i<qtdDisciplinas;i++){
