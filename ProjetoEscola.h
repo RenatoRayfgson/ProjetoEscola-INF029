@@ -46,6 +46,7 @@ void listarAlunoSexo(struct Aluno listaAlunos[], int qtdAlunos);
 void listarAlunoIdade(struct Aluno listaAlunos[], int qtdAlunos);
 void listarAlunoPoucasDisciplinas(struct Aluno listaAlunos[], int qtdAlunos); //Tirei struct Disciplina listaDisciplinas[]
 void listarAlunoAlfabeticamente(struct Aluno listaAlunos[], struct Aluno listaOrdenada[], int qtdAlunos);
+void removerAlunoDisciplina(struct Aluno listaAlunos[], int qtdAlunos, struct Disciplina listaDisciplinas[], int qtdDisciplinas);
 
 //Disciplina
 void menuDisciplina();

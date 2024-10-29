@@ -96,6 +96,11 @@ int main(){
                             listarAlunoAlfabeticamente(listaAlunos, listaOrdenada, qtdAlunos);                            
                             break;
                         }
+                        case 8:{
+                            opcaoAluno = -1;
+                            removerAlunoDisciplina(listaAlunos, qtdAlunos, listaDisciplinas, qtdDisciplinas);
+                            break;
+                        }
                         default:{    //Caso o usuário seja incapaz de ler
                             printf("Opção invalida!\n");
                             break;
