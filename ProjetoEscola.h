@@ -45,11 +45,13 @@ void removerAluno(int temp, struct Aluno listaAlunos[], int j, int i, int qtdAlu
 void listarAlunoSexo(struct Aluno listaAlunos[], int qtdAlunos);
 void listarAlunoIdade(struct Aluno listaAlunos[], int qtdAlunos);
 void listarAlunoPoucasDisciplinas(struct Aluno listaAlunos[], int qtdAlunos); //Tirei struct Disciplina listaDisciplinas[]
+void listarAlunoAlfabeticamente(struct Aluno listaAlunos[], struct Aluno listaOrdenada[], int qtdAlunos);
 
 //Disciplina
 void menuDisciplina();
 void criarDisciplina(int qtdDisciplinas, struct Disciplina listaDisciplinas[]);
 void listarDisciplina(int qtdDisciplinas, struct Disciplina listaDisciplinas[]);
+void listarDisciplinaCompleto(int qtdDisciplinas, struct Disciplina listaDisciplinas[], int qtdAlunos, struct Aluno listaAlunos[]);
 void removerDisciplina(int temp, int j, int i, int qtdDisciplinas, struct Disciplina listaDisciplinas[]);
 
 //Professores
@@ -59,3 +61,4 @@ void listarProfessor(struct Professor listaProfessores[], int qtdProfessores);
 void removerProfessor(struct Professor listaProfessores[], int i, int j, int qtdProfessores, int temp);
 void listarProfessorSexo(struct Professor listaProfessores[], int qtdProfessores);
 void listarProfessorIdade(struct Professor listaProfessores[], int qtdProfessores);
+void listarProfessorAlfabeticamente(struct Professor listaProfessores[], struct Professor listaOrdenada[], int qtdProfessores);

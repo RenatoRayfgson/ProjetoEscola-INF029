@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "ProjetoEscola.h"
 
 void menuAluno(){
@@ -9,6 +10,7 @@ void menuAluno(){
     "[4] - Listar aluno por sexo\n"
     "[5] - Listar aluno por idade\n"
     "[6] - Listar aluno matriculado em menos de 3 disciplinas\n"
+    "[7] - Listar aluno por ordem alfabetica\n"
     "[0] - Voltar\n ");
 };
 void matricularAluno(struct Aluno listaAlunos[],int temp, int qtdAlunos){
@@ -159,5 +161,23 @@ void listarAlunoIdade(struct Aluno listaAlunos[], int qtdAlunos){
         }
     }
 };
-
-//A função adicionarAlunoDisciplina precisa de testes
+void listarAlunoAlfabeticamente(struct Aluno listaAlunos[], struct Aluno listaOrdenada[], int qtdAlunos){
+    int i=0, j=0;
+    char temp[128];
+    for(i=0; i<qtdAlunos; i++){
+        strcpy(listaOrdenada[i].nome, listaAlunos[i].nome);
+    }
+    for(i=0; i<qtdAlunos-1; i++){
+        for(j=i+1; j<qtdAlunos; j++){
+            if(strcmp(listaOrdenada[i].nome, listaAlunos[j].nome) > 0){
+                strcpy(temp, listaOrdenada[i].nome);
+                strcpy(listaOrdenada[i].nome, listaOrdenada[j].nome);
+                strcpy(listaOrdenada[j].nome, temp);
+            }
+        }
+    }
+    printf("Os alunos em ordem alfabética são:\n");
+    for(i=0; i<qtdAlunos; i++){
+        printf("%s\n", listaOrdenada[i].nome);
+    }
+};

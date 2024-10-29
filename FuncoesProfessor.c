@@ -8,6 +8,7 @@ void menuProfessor(){
     "[3] - Remover professor\n"
     "[4] - Listar professor por sexo\n"
     "[5] - Listar professor por idade\n"
+    "[6] - Listar professor por ordem alfabetica\n"
     "[0] - Voltar\n ");    
 };
 void matricularProfessor(struct Professor listaProfessores[], int temp, int qtdProfessores){
@@ -91,4 +92,24 @@ void listarProfessorIdade(struct Professor listaProfessores[], int qtdProfessore
     }
 
 };
-//aa
+void listarProfessorAlfabeticamente(struct Professor listaProfessores[], struct Professor listaOrdenada[], int qtdProfessores){
+    int i=0, j=0;
+    char temp[128];
+    for(i=0; i<qtdProfessores; i++){
+        strcpy(listaOrdenada[i].nome, listaProfessores[i].nome);
+    }
+    for(i=0; i<qtdProfessores-1; i++){
+        for(j=i+1; j<qtdProfessores; j++){
+            if(strcmp(listaOrdenada[i].nome, listaProfessores[j].nome) > 0){
+                strcpy(temp, listaOrdenada[i].nome);
+                strcpy(listaOrdenada[i].nome, listaOrdenada[j].nome);
+                strcpy(listaOrdenada[j].nome, temp);
+            }
+        }
+    }
+    printf("Os professores em ordem alfabética são:\n");
+    for(i=0; i<qtdProfessores; i++){
+        printf("%s\n", listaOrdenada[i].nome);
+    }
+};
+

@@ -6,7 +6,8 @@ int main(){
     setlocale(LC_ALL,"Portuguese"); 
     int opcao=-1, opcaoAluno=-1, opcaoProfessor=-1, opcaoDisciplina=-1;
     int i=0,j=0,qtdAlunos=0,temp,verificador=0,qtdProfessores=0, qtdDisciplinas=0, aux;
-    struct Aluno listaAlunos[maxAlunos];   
+    struct Aluno listaAlunos[maxAlunos];
+    struct Aluno listaOrdenada[maxAlunos];   
     struct Professor listaProfessores[maxProfessores]; 
     struct Disciplina listaMatriculados[maxAlunos];
     struct Disciplina listaDisciplinas[maxDisciplinas];
@@ -90,6 +91,11 @@ int main(){
                             listarAlunoPoucasDisciplinas(listaAlunos, qtdAlunos);
                             break;
                         }
+                        case 7:{
+                            opcaoAluno = -1;
+                            listarAlunoAlfabeticamente(listaAlunos, listaOrdenada, qtdAlunos);                            
+                            break;
+                        }
                         default:{    //Caso o usuário seja incapaz de ler
                             printf("Opção invalida!\n");
                             break;
@@ -166,6 +172,11 @@ int main(){
                             listarProfessorIdade(listaProfessores, qtdProfessores);
                             break;
                         }
+                        case 6:{
+                            opcaoProfessor = -1;
+                            listarProfessorAlfabeticamente(listaProfessores, listaOrdenada, qtdProfessores);
+                            break;
+                        }
                         default:{
                             printf("Opção invalida!\n");
                             break;
@@ -239,6 +250,11 @@ int main(){
                                 printf("Nenhuma Disciplina com esse código foi encontrada!");
                                 break;
                             }
+                        }
+                        case 4:{
+                            opcaoDisciplina = -1;
+                            listarDisciplinaCompleto(qtdDisciplinas, listaDisciplinas, qtdAlunos, listaAlunos);
+                            break;
                         }
                         default:{     //Caso o usuário seja incapaz de ler
                             printf("Opção inválida");
