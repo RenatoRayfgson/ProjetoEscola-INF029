@@ -11,6 +11,7 @@ void menuAluno(){
     "[5] - Listar aluno por idade\n"
     "[6] - Listar aluno matriculado em menos de 3 disciplinas\n"
     "[7] - Listar aluno por ordem alfabetica\n"
+    "[8] - Remover aluno de disciplina\n"
     "[0] - Voltar\n ");
 };
 void matricularAluno(struct Aluno listaAlunos[],int temp, int qtdAlunos){
@@ -21,15 +22,35 @@ void matricularAluno(struct Aluno listaAlunos[],int temp, int qtdAlunos){
     printf("Insira o sexo do aluno: \n");
     fgets(listaAlunos[qtdAlunos].sexo, 2, stdin);
     limparBuffer();
+    while(strcmp(listaAlunos[qtdAlunos].sexo, "M")!=0 && strcmp(listaAlunos[qtdAlunos].sexo, "F")!=0){
+    printf("Insira um sexo válido pro aluno (M ou F): \n");
+    fgets(listaAlunos[qtdAlunos].sexo, 2, stdin);
+    limparBuffer();
+    }
     printf("Insira o ano de nascimento do aluno: \n");
     scanf("%d", &listaAlunos[qtdAlunos].dataNascimento.ano);
     limparBuffer();
+    while(listaAlunos[qtdAlunos].dataNascimento.ano > 2024 || listaAlunos[qtdAlunos].dataNascimento.ano < 1900){
+        printf("Insira um ano de nascimento válido pro aluno: \n");
+        scanf("%d", &listaAlunos[qtdAlunos].dataNascimento.ano);
+        limparBuffer();
+    }    
     printf("Insira o mes de nascimento do aluno: \n");
     scanf("%d", &listaAlunos[qtdAlunos].dataNascimento.mes);
     limparBuffer();
+    while(listaAlunos[qtdAlunos].dataNascimento.mes > 12 || listaAlunos[qtdAlunos].dataNascimento.mes < 1){
+        printf("Insira um mes de nascimento válido pro aluno: \n");
+        scanf("%d", &listaAlunos[qtdAlunos].dataNascimento.mes);
+        limparBuffer();
+    }    
     printf("Insira o dia de nascimento do aluno: \n");
     scanf("%d", &listaAlunos[qtdAlunos].dataNascimento.dia);
     limparBuffer();
+    while(listaAlunos[qtdAlunos].dataNascimento.dia > 31 || listaAlunos[qtdAlunos].dataNascimento.dia < 1){
+    printf("Insira um dia de nascimento válido pro aluno: \n");
+    scanf("%d", &listaAlunos[qtdAlunos].dataNascimento.dia);
+    limparBuffer();
+    }
     printf("Insira o CPF do aluno, sem pontos ou traços: \n");
     fgets(listaAlunos[qtdAlunos].cpf, 12, stdin);
     limparBuffer();
@@ -181,3 +202,44 @@ void listarAlunoAlfabeticamente(struct Aluno listaAlunos[], struct Aluno listaOr
         printf("%s\n", listaOrdenada[i].nome);
     }
 };
+void removerAlunoDisciplina(struct Aluno listaAlunos[], int qtdAlunos, struct Disciplina listaDisciplinas[], int qtdDisciplinas){
+    int i=0,j=0,idAluno=0, temp=0, verificador=0, k=0, qtdMatriculas=0;
+    printf("Qual a matricula do aluno que deseja remover da disciplina? \n");
+    scanf("%d", &temp);
+    for(i=0; i<qtdAlunos; i++){
+        if(temp==listaAlunos[i].matricula){
+            idAluno=i;
+            verificador = 1;
+            break;
+        }
+    }
+    if(verificador == 1){
+        verificador = 0;
+        printf("Qual o codigo da Disciplina que deve ser removida? \n");
+        scanf("%d", &temp);
+        for(i=0; i<qtdDisciplinas; i++){
+            if(temp==listaDisciplinas[i].codigo){                
+                verificador = 1;
+                break;
+            }
+        }
+        if(verificador == 1){
+            while(listaAlunos[idAluno].disciplinasMatriculadas[k]!=0){
+                qtdMatriculas++;
+                k++;
+            }            
+            for(i=0; i<qtdMatriculas; i++){
+                if(listaAlunos[idAluno].disciplinasMatriculadas[i]==temp){ 
+                    listaAlunos[idAluno].disciplinasMatriculadas[i]=listaAlunos[idAluno].disciplinasMatriculadas[qtdMatriculas-1];
+                    listaAlunos[idAluno].disciplinasMatriculadas[qtdMatriculas-1]=0;
+                    return;
+                }
+            }
+        }else{
+            printf("Disciplina não encontrada.\n");
+        }
+    }else{
+        printf("Aluno não encontrado.\n");
+    }
+
+}

@@ -19,15 +19,35 @@ void matricularProfessor(struct Professor listaProfessores[], int temp, int qtdP
     printf("Insira o sexo do professor: \n");
     fgets(listaProfessores[qtdProfessores].sexo, 2, stdin);
     limparBuffer();
+    while(strcmp(listaProfessores[qtdProfessores].sexo, "M")!=0 && strcmp(listaProfessores[qtdProfessores].sexo, "F")!=0){
+    printf("Insira um sexo válido pro professor (M ou F): \n");
+    fgets(listaProfessores[qtdProfessores].sexo, 2, stdin);
+    limparBuffer();
+    }
     printf("Insira o ano de nascimento do professor: \n");
     scanf("%d", &listaProfessores[qtdProfessores].dataNascimento.ano);
     limparBuffer();
+    while(listaProfessores[qtdProfessores].dataNascimento.ano > 2024 || listaProfessores[qtdProfessores].dataNascimento.ano < 1900){
+        printf("Insira um ano de nascimento válido pro professor: \n");
+        scanf("%d", &listaProfessores[qtdProfessores].dataNascimento.ano);
+        limparBuffer();
+    }
     printf("Insira o mes de nascimento do professor: \n");
     scanf("%d", &listaProfessores[qtdProfessores].dataNascimento.mes);
     limparBuffer();
+    while(listaProfessores[qtdProfessores].dataNascimento.mes > 12 || listaProfessores[qtdProfessores].dataNascimento.mes < 1){
+        printf("Insira um mês de nascimento válido pro professor: \n");
+        scanf("%d", &listaProfessores[qtdProfessores].dataNascimento.mes);
+        limparBuffer();
+    }
     printf("Insira o dia de nascimento do professor: \n");
     scanf("%d", &listaProfessores[qtdProfessores].dataNascimento.dia);
     limparBuffer();
+    while(listaProfessores[qtdProfessores].dataNascimento.dia > 31 || listaProfessores[qtdProfessores].dataNascimento.dia < 1){
+        printf("Insira um mês de nascimento válido pro professor: \n");
+        scanf("%d", &listaProfessores[qtdProfessores].dataNascimento.dia);
+        limparBuffer();
+    }
     printf("Insira o CPF do professor, sem pontos ou traços: \n");
     fgets(listaProfessores[qtdProfessores].cpf, 12, stdin);
     limparBuffer();
