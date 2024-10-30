@@ -54,6 +54,19 @@ void matricularAluno(struct Aluno listaAlunos[],int temp, int qtdAlunos){
     printf("Insira o CPF do aluno, sem pontos ou traços: \n");
     fgets(listaAlunos[qtdAlunos].cpf, 12, stdin);
     limparBuffer();
+    size_t tam = strlen(listaAlunos[qtdAlunos].cpf);
+    if(listaAlunos[qtdAlunos].cpf[tam-1] == '\n'){
+        listaAlunos[qtdAlunos].cpf[tam-1] = '\0';
+    }
+    while(strlen(listaAlunos[qtdAlunos].cpf)!= 11){
+        printf("Insira um CPF válido pro aluno, sem pontos ou traços: \n");
+        fgets(listaAlunos[qtdAlunos].cpf, 12, stdin);
+        limparBuffer();
+        tam = strlen(listaAlunos[qtdAlunos].cpf);
+        if(listaAlunos[qtdAlunos].cpf[tam-1] == '\n'){
+            listaAlunos[qtdAlunos].cpf[tam-1] = '\0';
+        }
+    }
     listaAlunos[qtdAlunos].idade = listaAlunos[qtdAlunos].dataNascimento.ano * 365 + listaAlunos[qtdAlunos].dataNascimento.mes * 30 + listaAlunos[qtdAlunos].dataNascimento.dia;           
 };
 void adicionarAlunoDisciplina(struct Aluno listaAlunos[], int qtdAlunos, struct Disciplina listaDisciplinas[], int qtdDisciplinas){
