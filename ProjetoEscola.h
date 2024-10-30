@@ -8,7 +8,7 @@ struct Data{
 struct Aluno{
     int matricula;
     char nome[128];
-    char sexo[1]; 
+    char sexo[2]; 
     struct Data dataNascimento;
     char cpf[12];
     int idade; //Em dias
