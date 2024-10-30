@@ -20,9 +20,9 @@ void matricularProfessor(struct Professor listaProfessores[], int temp, int qtdP
     fgets(listaProfessores[qtdProfessores].sexo, 2, stdin);
     limparBuffer();
     while(strcmp(listaProfessores[qtdProfessores].sexo, "M")!=0 && strcmp(listaProfessores[qtdProfessores].sexo, "F")!=0){
-    printf("Insira um sexo válido pro professor (M ou F): \n");
-    fgets(listaProfessores[qtdProfessores].sexo, 2, stdin);
-    limparBuffer();
+        printf("Insira um sexo válido pro professor (M ou F): \n");
+        fgets(listaProfessores[qtdProfessores].sexo, 2, stdin);
+        limparBuffer();
     }
     printf("Insira o ano de nascimento do professor: \n");
     scanf("%d", &listaProfessores[qtdProfessores].dataNascimento.ano);
