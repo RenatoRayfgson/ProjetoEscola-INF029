@@ -5,7 +5,7 @@
 int main(){    
     setlocale(LC_ALL,"Portuguese"); 
     int opcao=-1, opcaoAluno=-1, opcaoProfessor=-1, opcaoDisciplina=-1;
-    int i=0,j=0,qtdAlunos=0,temp,verificador=0,qtdProfessores=0, qtdDisciplinas=0, aux;
+    int i=0,j=0,qtdAlunos=0,temp,verificador=0,qtdProfessores=0, qtdDisciplinas=0, aux, validarMatricula=0;
     struct Aluno listaAlunos[maxAlunos];
     struct Aluno listaOrdenada[maxAlunos];   
     struct Professor listaProfessores[maxProfessores]; 
@@ -31,16 +31,24 @@ int main(){
                         }
                         case 1:{    //Matricular aluno
                             opcaoAluno = -1;
+                            validarMatricula = 0;
                             if(qtdAlunos>=maxAlunos){
                                 printf("Quantidade máxima de alunos atingida!\n");
                             }else{
-                                printf("Insira a matrícula do novo aluno: \n");
-                                scanf("%d", &temp);
-                                limparBuffer();
-                                for(i=0;i<qtdAlunos;i++){
-                                    if(temp==listaAlunos[i].matricula){
-                                        printf("Matrícula já registrada!\n");
-                                        break;
+                                while(validarMatricula != 1){
+                                    printf("Insira a matrícula do novo aluno: \n");
+                                    scanf("%d", &temp);
+                                    limparBuffer();
+                                    int jaExiste = 0;
+                                    for(i=0;i<qtdAlunos;i++){
+                                        if(temp==listaAlunos[i].matricula){
+                                            printf("Matrícula já registrada! Insira uma matrícula diferente!\n");
+                                            jaExiste = 1;
+                                            break;
+                                        }
+                                    }
+                                    if(jaExiste==0){
+                                        validarMatricula=1;
                                     }
                                 }
                                 listaAlunos[qtdAlunos].matricula=temp;
@@ -119,17 +127,24 @@ int main(){
                             break;
                         }
                         case 1:{    //Matricular professor
-                            opcaoProfessor = -1;                            
+                            opcaoProfessor = -1; validarMatricula = 0;                           
                             if(qtdProfessores>=maxProfessores){
                                 printf("Quantidade máxima de professores atingida!\n");
                             }else{
-                                printf("Insira a matrícula do novo professor: \n");
-                                scanf("%d", &temp);
-                                limparBuffer();
-                                for(i=0;i<qtdProfessores;i++){
-                                    if(temp==listaProfessores[i].matricula){
-                                        printf("Matrícula já registrada!\n");
-                                        break;
+                                while(validarMatricula != 1){
+                                    printf("Insira a matrícula do novo professor: \n");
+                                    scanf("%d", &temp);
+                                    limparBuffer();
+                                    int jaExiste = 0;
+                                    for(i=0;i<qtdProfessores;i++){
+                                        if(temp==listaProfessores[i].matricula){
+                                            printf("Matrícula já registrada! Insira uma matricula diferente!\n");
+                                            jaExiste = 1;
+                                            break;
+                                        }
+                                    }
+                                    if(jaExiste==0){
+                                        validarMatricula = 1;
                                     }
                                 }
                                 matricularProfessor(listaProfessores, temp, qtdProfessores);
@@ -201,6 +216,7 @@ int main(){
                         }
                         case 1:{     //Criar disciplina 
                             opcaoDisciplina = -1;
+                            int validarDisciplina = 0;
                             if(qtdDisciplinas<maxDisciplinas){
                                 printf("Qual a matricula do professor da Disciplina?\n");
                                 scanf("%d", &temp);
@@ -218,7 +234,7 @@ int main(){
                                     break;
                                 }
                                 i=0;                                
-                                criarDisciplina(qtdDisciplinas, listaDisciplinas);                                                           
+                                criarDisciplina(qtdDisciplinas, listaDisciplinas, temp, validarDisciplina);                                                           
                                 qtdDisciplinas++;
                                 break;
                             }else{

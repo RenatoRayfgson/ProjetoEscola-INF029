@@ -9,14 +9,28 @@ void menuDisciplina(){
     "[4] - Listar Disciplina com alunos matriculados\n"
     "[0] - Voltar\n ");
 };
-void criarDisciplina(int qtdDisciplinas, struct Disciplina listaDisciplinas[]){    
+void criarDisciplina(int qtdDisciplinas, struct Disciplina listaDisciplinas[],int temp, int validarDisciplina ){    
     limparBuffer();
     printf("Qual o nome da Disciplina? ");
     gets(listaDisciplinas[qtdDisciplinas].nome);    
     limparBuffer();
-    printf("Qual o código da nova Disciplina? ");
-    scanf("%d", &listaDisciplinas[qtdDisciplinas].codigo);
-    limparBuffer();
+    while(validarDisciplina!=1){
+        printf("Qual o código da nova Disciplina? \n");
+        scanf("%d", &temp);
+        limparBuffer();
+        int jaExiste = 0;
+        for(int i=0; i<qtdDisciplinas; i++){
+            if(temp==listaDisciplinas[i].codigo){
+                printf("Este código já existe! Insira um código diferente! \n");
+                jaExiste = 1;
+                break;
+            }
+        }
+        if(jaExiste == 0){
+            validarDisciplina = 1;
+        }
+    }
+    listaDisciplinas[qtdDisciplinas].codigo = temp;
     printf("Qual o semestre da Disciplina? ");
     scanf("%d", &listaDisciplinas[qtdDisciplinas].semestre);
     limparBuffer();       

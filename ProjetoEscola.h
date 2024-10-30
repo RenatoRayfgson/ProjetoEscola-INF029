@@ -50,7 +50,7 @@ void removerAlunoDisciplina(struct Aluno listaAlunos[], int qtdAlunos, struct Di
 
 //Disciplina
 void menuDisciplina();
-void criarDisciplina(int qtdDisciplinas, struct Disciplina listaDisciplinas[]);
+void criarDisciplina(int qtdDisciplinas, struct Disciplina listaDisciplinas[], int temp, int validarDisciplina);
 void listarDisciplina(int qtdDisciplinas, struct Disciplina listaDisciplinas[]);
 void listarDisciplinaCompleto(int qtdDisciplinas, struct Disciplina listaDisciplinas[], int qtdAlunos, struct Aluno listaAlunos[]);
 void removerDisciplina(int temp, int j, int i, int qtdDisciplinas, struct Disciplina listaDisciplinas[]);
