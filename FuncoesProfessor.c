@@ -9,6 +9,7 @@ void menuProfessor(){
     "[4] - Listar professor por sexo\n"
     "[5] - Listar professor por idade\n"
     "[6] - Listar professor por ordem alfabetica\n"
+    "[7] - Atualizar professor\n"
     "[0] - Voltar\n ");    
 };
 void matricularProfessor(struct Professor listaProfessores[], int temp, int qtdProfessores){
@@ -143,6 +144,129 @@ void listarProfessorAlfabeticamente(struct Professor listaProfessores[], struct 
     printf("Os professores em ordem alfabética são:\n");
     for(i=0; i<qtdProfessores; i++){
         printf("%s\n", listaOrdenada[i].nome);
+    }
+};
+void atualizarProfessor(struct Professor listaProfessores[], int qtdProfessores, struct Disciplina listaDisciplinas[], int qtdDisciplinas){
+    int temp, professor=0, verificador=0, validarMatricula = 1;
+    int opcaoAlterar = -1;
+    char CPF[12];
+    printf("Digite a matrícula do aluno que deseja alterar: \n");
+    scanf("%d", &temp);
+    for(int i=0; i<qtdProfessores; i++){
+        if(temp==listaProfessores[i].matricula){
+            professor = i;
+            verificador = 1;
+            break;
+        }
+    }
+    if(verificador == 1){
+        printf("Selecione o dado que deseja alterar:\n"
+        "[1] - Matricula do professor\n"
+        "[2] - Sexo do professor\n"
+        "[3] - Dia de nascimento\n"
+        "[4] - Mês de nascimento\n"
+        "[5] - Ano de nascimento\n"
+        "[6] - CPF\n"            
+        "[0] - Cancelar\n ");
+        scanf("%d", &opcaoAlterar);
+        switch(opcaoAlterar){
+            case 1:{
+                int jaExiste;
+                do{
+                    printf("Qual a nova matrícula deste professor? \n");
+                    scanf("%d", &temp);
+                    limparBuffer();
+                    jaExiste = 0;
+                    for(int i=0; i<qtdProfessores; i++){
+                        if(temp == listaProfessores[i].matricula){
+                            printf("Matrícula já existe! Tente uma diferente!\n");
+                            jaExiste = 1;
+                            break;
+                        }
+                    }
+                }while(jaExiste);
+                listaProfessores[professor].matricula = temp;
+                printf("Matrícula alterada com sucesso!\n");
+                break;
+            }
+            case 2:{
+                if(strcmp(listaProfessores[professor].sexo, "M") == 0){
+                    strcpy(listaProfessores[professor].sexo, "F");
+                }else{
+                    strcpy(listaProfessores[professor].sexo, "M");
+                }
+                printf("Sexo alterado com sucesso!\n");
+                break;
+            }
+            case 3:{
+                printf("Qual o novo dia de nascimento do professor? \n");
+                scanf("%d", &temp);
+                limparBuffer();
+                while(temp > 31 || temp < 1){
+                    printf("Insira um dia de nascimento válido pro professor: \n");
+                    scanf("%d", &temp);
+                    limparBuffer();
+                }
+                listaProfessores[professor].dataNascimento.dia = temp;
+                listaProfessores[professor].idade = listaProfessores[professor].dataNascimento.ano * 365 + listaProfessores[professor].dataNascimento.mes * 30 + listaProfessores[professor].dataNascimento.dia;
+                printf("Ano alterado com sucesso!");
+                break;
+            }
+            case 4:{
+                printf("Qual o novo mês de nascimento do professor? \n");
+                scanf("%d", &temp);
+                limparBuffer();
+                while(temp > 12 || temp < 1){
+                    printf("Insira um mês de nascimento válido pro professor: \n");
+                    scanf("%d", &temp);
+                    limparBuffer();
+                }
+                listaProfessores[professor].dataNascimento.mes = temp;
+                listaProfessores[professor].idade = listaProfessores[professor].dataNascimento.ano * 365 + listaProfessores[professor].dataNascimento.mes * 30 + listaProfessores[professor].dataNascimento.dia;
+                printf("Mes alterado com sucesso!");
+                break;
+            }
+            case 5:{
+                printf("Qual o novo ano de nascimento do professor? \n");
+                scanf("%d", &temp);
+                limparBuffer();
+                while(temp > 2024 || temp < 1900){
+                    printf("Insira um ano de nascimento válido pro professor: \n");
+                    scanf("%d", &temp);
+                    limparBuffer();
+                }
+                listaProfessores[professor].dataNascimento.ano = temp;
+                listaProfessores[professor].idade = listaProfessores[professor].dataNascimento.ano * 365 + listaProfessores[professor].dataNascimento.mes * 30 + listaProfessores[professor].dataNascimento.dia;
+                printf("Dia alterado com sucesso!");
+                break;
+            }
+            case 6:{
+                printf("Insira o novo CPF do professor, sem pontos ou traços: \n");
+                fgets(CPF, 12, stdin);
+                limparBuffer();
+                size_t tam = strlen(CPF);
+                if(CPF[tam-1] == '\n'){
+                    CPF[tam-1] = '\0';
+                }
+                while(strlen(CPF)!= 11){
+                    printf("Insira um CPF válido pro professor, sem pontos ou traços: \n");
+                    fgets(CPF, 12, stdin);
+                    limparBuffer();
+                    tam = strlen(CPF);
+                    if(CPF[tam-1] == '\n'){
+                        CPF[tam-1] = '\0';
+                    }
+                }
+                strcpy(listaProfessores[professor].cpf, CPF);
+                break;
+            }            
+            case 0:{
+                opcaoAlterar = -1;
+                break;
+            }
+        }
+    }else{
+        printf("Professor não encontrado!");
     }
 };
 

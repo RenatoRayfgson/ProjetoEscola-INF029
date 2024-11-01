@@ -7,6 +7,7 @@ void menuDisciplina(){
     "[2] - Listar Disciplinas\n"
     "[3] - Remover Disciplina\n"
     "[4] - Listar Disciplina com alunos matriculados\n"
+    "[5] - Atualizar Disciplina\n"
     "[0] - Voltar\n ");
 };
 void criarDisciplina(int qtdDisciplinas, struct Disciplina listaDisciplinas[],int temp, int validarDisciplina ){    
@@ -80,3 +81,83 @@ void removerDisciplina(int temp, int j, int i, int qtdDisciplinas, struct Discip
         strcpy(listaDisciplinas[j].nome, listaDisciplinas[j+1].nome);
     }    
 };
+void atualizarDisciplina(struct Disciplina listaDisciplinas[], int qtdDisciplinas, struct Professor listaProfessores[], int qtdProfessores){
+    int temp, disciplina, verificador = 0, opcaoAlterar = -1, jaExiste;
+    printf("Digite o código da disciplina que deseja alterar: \n");
+    scanf("%d", &temp);
+    limparBuffer();
+    for(int i=0; i<qtdDisciplinas; i++){
+        if(temp==listaDisciplinas[i].codigo){
+            disciplina = i;
+            verificador = 1;
+            break;
+        }
+    }
+    if(verificador == 1){
+        printf("Selecione o dado que deseja alterar:\n"
+        "[1] - Codigo da disciplina\n"
+        "[2] - Semestre da disciplina\n"
+        "[3] - Nome da disciplina\n"
+        "[4] - Professor responsável\n"    
+        "[0] - Cancelar\n ");
+        scanf("%d", &opcaoAlterar);
+        limparBuffer();
+        switch(opcaoAlterar){
+            case 1:{
+                do{
+                    printf("Insira o novo codigo dessa disciplina: \n");
+                    scanf("%d", &temp);
+                    limparBuffer();
+                    jaExiste = 0;
+                    for(int i=0; i<qtdDisciplinas; i++){
+                        if(temp == listaDisciplinas[i].codigo){
+                            printf("A disciplina já existe! Tente outro código\n");
+                            jaExiste=1;
+                            break;
+                        }
+                    }
+                }while(jaExiste);
+                listaDisciplinas[disciplina].codigo=temp;
+                printf("Código alterado com sucesso!\n");
+                break;
+            }
+            case 2:{
+                printf("Insira o novo semestre dessa disciplina: \n");
+                scanf("%d", &listaDisciplinas[disciplina].semestre);
+                limparBuffer();
+                break;
+            }
+            case 3:{
+                printf("Insira o novo nome da disciplina: \n");
+                fgets(listaDisciplinas[disciplina].nome,128,stdin);
+                limparBuffer();
+                break;
+            }
+            case 4:{
+                do{
+                printf("Qual a matricula do professor novo? \n");
+                scanf("%d", &temp);
+                limparBuffer();
+                jaExiste = 0;
+                    for(int i=0; i<qtdProfessores; i++){
+                        if(temp == listaProfessores[i].matricula){
+                            jaExiste=1;
+                            break;
+                        }
+                    }
+                    if(jaExiste == 0){
+                        printf("Insira uma matricula válida!\n");
+                    }
+                }while(!jaExiste);
+                listaDisciplinas[disciplina].matriculaProfessor = temp;
+                printf("Professor alterado com sucesso!\n");
+                break;
+            }
+            case 0:{
+                break;
+            }
+        }
+    }else{
+        printf("Disciplina não encontrada\n");
+    }
+}

@@ -109,6 +109,11 @@ int main(){
                             removerAlunoDisciplina(listaAlunos, qtdAlunos, listaDisciplinas, qtdDisciplinas);
                             break;
                         }
+                        case 9:{
+                            opcaoAluno = -1;
+                            atualizarAluno(listaAlunos, qtdAlunos, listaDisciplinas, qtdDisciplinas);
+                            break;
+                        }
                         default:{    //Caso o usuário seja incapaz de ler
                             printf("Opção invalida!\n");
                             break;
@@ -197,6 +202,11 @@ int main(){
                             listarProfessorAlfabeticamente(listaProfessores, listaOrdenada, qtdProfessores);
                             break;
                         }
+                        case 7:{
+                            opcaoProfessor = -1;
+                            atualizarProfessor(listaProfessores, qtdProfessores, listaDisciplinas, qtdDisciplinas);
+                            break;
+                        }
                         default:{
                             printf("Opção invalida!\n");
                             break;
@@ -275,6 +285,11 @@ int main(){
                         case 4:{
                             opcaoDisciplina = -1;
                             listarDisciplinaCompleto(qtdDisciplinas, listaDisciplinas, qtdAlunos, listaAlunos);
+                            break;
+                        }
+                        case 5:{
+                            opcaoDisciplina = -1;
+                            atualizarDisciplina(listaDisciplinas, qtdDisciplinas, listaProfessores, qtdProfessores);
                             break;
                         }
                         default:{     //Caso o usuário seja incapaz de ler
