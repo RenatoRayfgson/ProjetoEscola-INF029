@@ -12,6 +12,7 @@ void menuAluno(){
     "[6] - Listar aluno matriculado em menos de 3 disciplinas\n"
     "[7] - Listar aluno por ordem alfabetica\n"
     "[8] - Remover aluno de disciplina\n"
+    "[9] - Atualizar aluno\n"
     "[0] - Voltar\n ");
 };
 void matricularAluno(struct Aluno listaAlunos[],int temp, int qtdAlunos){
@@ -256,3 +257,154 @@ void removerAlunoDisciplina(struct Aluno listaAlunos[], int qtdAlunos, struct Di
     }
 
 }
+void atualizarAluno(struct Aluno listaAlunos[], int qtdAlunos, struct Disciplina listaDisciplinas[], int qtdDisciplinas){
+    int temp, aluno=0, verificador=0, validarMatricula = 1;
+    int opcaoAlterar = -1;
+    char CPF[12];
+    printf("Digite a matrícula do aluno que deseja alterar: \n");
+    scanf("%d", &temp);
+    for(int i=0; i<qtdAlunos; i++){
+        if(temp==listaAlunos[i].matricula){
+            aluno = i;
+            verificador = 1;
+            break;
+        }
+    }
+    if(verificador == 1){
+        printf("Selecione o dado que deseja alterar:\n"
+        "[1] - Matricula do aluno\n"
+        "[2] - Sexo do aluno\n"
+        "[3] - Dia de nascimento\n"
+        "[4] - Mês de nascimento\n"
+        "[5] - Ano de nascimento\n"
+        "[6] - CPF\n"
+        "[7] - Adicionar aluno em mais uma disciplina\n"    
+        "[0] - Cancelar\n ");
+        scanf("%d", &opcaoAlterar);
+        switch(opcaoAlterar){
+            case 1:{
+                int jaExiste;
+                do{
+                    printf("Qual a nova matrícula deste aluno? \n");
+                    scanf("%d", &temp);
+                    limparBuffer();
+                    jaExiste = 0;
+                    for(int i=0; i<qtdAlunos; i++){
+                        if(temp == listaAlunos[i].matricula){
+                            printf("Matrícula já existe! Tente uma diferente!\n");
+                            jaExiste = 1;
+                            break;
+                        }
+                    }
+                }while(jaExiste);
+                listaAlunos[aluno].matricula = temp;
+                printf("Matrícula alterada com sucesso!\n");
+                break;
+            }
+            case 2:{
+                if(strcmp(listaAlunos[aluno].sexo, "M") == 0){
+                    strcpy(listaAlunos[aluno].sexo, "F");
+                }else{
+                    strcpy(listaAlunos[aluno].sexo, "M");
+                }
+                printf("Sexo alterado com sucesso!\n");
+                break;
+            }
+            case 3:{
+                printf("Qual o novo dia de nascimento do aluno? \n");
+                scanf("%d", &temp);
+                limparBuffer();
+                while(temp > 31 || temp < 1){
+                    printf("Insira um dia de nascimento válido pro aluno: \n");
+                    scanf("%d", &temp);
+                    limparBuffer();
+                }
+                listaAlunos[aluno].dataNascimento.dia = temp;
+                listaAlunos[aluno].idade = listaAlunos[aluno].dataNascimento.ano * 365 + listaAlunos[aluno].dataNascimento.mes * 30 + listaAlunos[aluno].dataNascimento.dia;
+                printf("Ano alterado com sucesso!");
+                break;
+            }
+            case 4:{
+                printf("Qual o novo mês de nascimento do aluno? \n");
+                scanf("%d", &temp);
+                limparBuffer();
+                while(temp > 12 || temp < 1){
+                    printf("Insira um mês de nascimento válido pro aluno: \n");
+                    scanf("%d", &temp);
+                    limparBuffer();
+                }
+                listaAlunos[aluno].dataNascimento.mes = temp;
+                listaAlunos[aluno].idade = listaAlunos[aluno].dataNascimento.ano * 365 + listaAlunos[aluno].dataNascimento.mes * 30 + listaAlunos[aluno].dataNascimento.dia;
+                printf("Mes alterado com sucesso!");
+                break;
+            }
+            case 5:{
+                printf("Qual o novo ano de nascimento do aluno? \n");
+                scanf("%d", &temp);
+                limparBuffer();
+                while(temp > 2024 || temp < 1900){
+                    printf("Insira um ano de nascimento válido pro aluno: \n");
+                    scanf("%d", &temp);
+                    limparBuffer();
+                }
+                listaAlunos[aluno].dataNascimento.ano = temp;
+                listaAlunos[aluno].idade = listaAlunos[aluno].dataNascimento.ano * 365 + listaAlunos[aluno].dataNascimento.mes * 30 + listaAlunos[aluno].dataNascimento.dia;
+                printf("Dia alterado com sucesso!");
+                break;
+            }
+            case 6:{
+                printf("Insira o novo CPF do aluno, sem pontos ou traços: \n");
+                fgets(CPF, 12, stdin);
+                limparBuffer();
+                size_t tam = strlen(CPF);
+                if(CPF[tam-1] == '\n'){
+                    CPF[tam-1] = '\0';
+                }
+                while(strlen(CPF)!= 11){
+                    printf("Insira um CPF válido pro aluno, sem pontos ou traços: \n");
+                    fgets(CPF, 12, stdin);
+                    limparBuffer();
+                    tam = strlen(CPF);
+                    if(CPF[tam-1] == '\n'){
+                        CPF[tam-1] = '\0';
+                    }
+                }
+                strcpy(listaAlunos[aluno].cpf, CPF);
+                break;
+            }
+            case 7:{
+                printf("Qual o código da disciplina que o aluno deve ser adicionado? \n");
+                scanf("%d", &temp);
+                int qtdMatriculas=0; int j=0; int disciplinaExiste=0;
+                verificador = 0;
+                while(listaAlunos[aluno].disciplinasMatriculadas[j] != 0){
+                    if(temp == listaAlunos[aluno].disciplinasMatriculadas[j]){
+                        printf("Aluno já matriculado na disciplina!\n");
+                        verificador = 1;
+                        break;
+                    }
+                    j++;
+                }
+                if(verificador == 0){
+                    for(int i=0; i<qtdDisciplinas; i++){
+                        if(listaDisciplinas[i].codigo == temp){
+                            disciplinaExiste = 1;
+                            break;
+                        }
+                    }
+                    if(disciplinaExiste == 1){
+                        listaAlunos[aluno].disciplinasMatriculadas[j] = temp;
+                        printf("Aluno matriculado na disciplina com sucesso!\n");
+                    }                
+                }
+                break;            
+            }
+            case 0:{
+                opcaoAlterar = -1;
+                break;
+            }
+        }
+    }else{
+        printf("Aluno não encontrado!");
+    }
+};
